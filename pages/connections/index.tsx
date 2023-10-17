@@ -1,13 +1,12 @@
-import { RoundedBox } from '@react-three/drei'
-import { Canvas } from '@react-three/fiber'
 import { collection, getDocs } from 'firebase/firestore'
 import { Inter } from 'next/font/google'
 import { Suspense, useState } from 'react'
-import { DoubleSide } from 'three'
 
-import { Controls, ImagePanels, Lights } from '~/components/Canvas'
+import ThreeCanvas from '~/components/ThreeCanvas'
 import CursoredUserInfo from '~/components/CursoredUserInfo'
+import Guide from '~/components/Guide'
 import Loading from '~/components/Loading'
+import TopNavigation from '~/components/Navigation/TopNavigation'
 import { db } from '~/firebase'
 import useMouseTracker from '~/hooks/useMouseTracker'
 import User from '~/types/User'
@@ -17,22 +16,18 @@ const inter = Inter({ subsets: ['latin'] })
 export default function ConnectionsPage({ users }: { users: User[] }) {
   const { mousePosition } = useMouseTracker()
   const [hoverOnPanel, setHoverOnPanel] = useState(false)
+  const [showGuide, setShowGuide] = useState(false)
+  const [guideStep, setGuideStep] = useState<'description' | 'usage' | 'end'>('description')
 
   return (
     <main className={`${inter.className}`}>
       <div>
-        {/* <TopNavigation /> */}
         <CursoredUserInfo hoverOnPanel={hoverOnPanel} mousePosition={mousePosition} />
         <div className="absolute left-0 top-0 w-screen h-screen">
           <Suspense fallback={<Loading />}>
-            <Canvas>
-              <Lights />
-              <ImagePanels users={users} setHoverOnPanel={setHoverOnPanel} />
-              <Controls />
-              <RoundedBox args={[1000, 1000, 1000]} radius={100}>
-                <meshLambertMaterial attach="material" side={DoubleSide} color={'#5373E2'} />
-              </RoundedBox>
-            </Canvas>
+            {guideStep === 'end' && <TopNavigation />}
+            {showGuide && <Guide guideStep={guideStep} setGuideStep={setGuideStep} setShowGuide={setShowGuide} />}
+            <ThreeCanvas users={users} setHoverOnPanel={setHoverOnPanel} setShowGuide={setShowGuide} />
           </Suspense>
         </div>
       </div>

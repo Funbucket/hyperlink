@@ -2,6 +2,7 @@ import { OrbitControls } from '@react-three/drei'
 import { extend, useFrame, useThree } from '@react-three/fiber'
 import React, { useEffect, useRef, useState } from 'react'
 import { Vector3 } from 'three'
+import { useAnimationStore } from '~/stores/animation'
 
 extend({ OrbitControls })
 
@@ -14,6 +15,9 @@ const Controls = () => {
   const [moveBackward, setMoveBackward] = useState(false)
   const [moveRight, setMoveRight] = useState(false)
   const [moveLeft, setMoveLeft] = useState(false)
+  const { dispatchAnimationEnd } = useAnimationStore((state) => ({
+    dispatchAnimationEnd: state.dispatchAnimationEnd,
+  }))
 
   const velocity = new Vector3()
   let prevTime = performance.now()
@@ -61,7 +65,7 @@ const Controls = () => {
   }
 
   useEffect(() => {
-    camera.position.set(0, 0, 15)
+    camera.position.set(0, 0, 10)
     const animationDuration = 1.5
     const targetPosition = new Vector3(0, 0, 3.5)
     const initialPosition = camera.position.clone()
@@ -77,6 +81,7 @@ const Controls = () => {
         requestAnimationFrame(updateCameraPosition)
       } else {
         camera.position.copy(targetPosition)
+        dispatchAnimationEnd(true)
       }
     }
 
@@ -85,7 +90,7 @@ const Controls = () => {
     if (controlsRef.current) {
       controlsRef.current.target.set(0, 0, 0)
     }
-  }, [camera, controlsRef])
+  }, [camera, controlsRef, dispatchAnimationEnd])
 
   useEffect(() => {
     document.addEventListener('keydown', onKeyDown, false)
