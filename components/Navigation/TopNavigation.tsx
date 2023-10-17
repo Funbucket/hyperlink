@@ -45,7 +45,7 @@ const TopNavigation = () => {
       </button> */}
       <div className="flex flex-row justify-center">
         <button
-          className="mr-10"
+          // className="mr-10"
           onClick={() => {
             window.open('https://forms.gle/LSDA7PGN1Y9zc6ik8', '_blank')
           }}
