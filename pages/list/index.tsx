@@ -12,7 +12,7 @@ export default function ListPage({ users }: { users: User[] }) {
           return (
             <li key={user.id}>
               <Link href={user.siteUrl} target="_blank">
-                {user.order} / {user.name}
+                {user.order} / {user.name} / {user.sentence}
               </Link>
             </li>
           )

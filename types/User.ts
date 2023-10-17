@@ -4,4 +4,5 @@ export default interface User {
   name: string
   imageUrl: string
   siteUrl: string
+  sentence: string
 }
