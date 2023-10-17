@@ -8,6 +8,7 @@ const initialState: User = {
   name: '',
   imageUrl: '',
   siteUrl: '',
+  sentence: '',
 }
 
 export const useHoveredUserStore = create<HoveredUserStore>((set) => ({
