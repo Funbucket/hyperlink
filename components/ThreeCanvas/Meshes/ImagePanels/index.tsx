@@ -19,6 +19,8 @@ interface Props {
 }
 
 const ImagePanels = ({ users, setHoverOnPanel }: Props) => {
+  const initialScale = 1
+  const hoverScale = 1.2
   const { siteUrl, dispatchHoveredUser } = useHoveredUserStore((state) => ({
     siteUrl: state.siteUrl,
     dispatchHoveredUser: state.dispatchHoveredUser,
@@ -104,11 +106,13 @@ const ImagePanels = ({ users, setHoverOnPanel }: Props) => {
           dispatchHoveredUser(e.object.userData as User)
           setHoverOnPanel(true)
           document.body.style.cursor = 'pointer'
+          e.object.scale.set(hoverScale, hoverScale, hoverScale)
         }
 
-        const handleMeshPointerOut = () => {
+        const handleMeshPointerOut = (e: ThreeEvent<PointerEvent>) => {
           setHoverOnPanel(false)
           document.body.style.cursor = 'auto'
+          e.object.scale.set(initialScale, initialScale, initialScale)
         }
 
         return (

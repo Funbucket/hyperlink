@@ -67,7 +67,7 @@ const Controls = () => {
   useEffect(() => {
     camera.position.set(0, 0, 10)
     const animationDuration = 1.5
-    const targetPosition = new Vector3(0, 0, 3.5)
+    const targetPosition = new Vector3(0, 0, 0)
     const initialPosition = camera.position.clone()
 
     const startTime = performance.now()

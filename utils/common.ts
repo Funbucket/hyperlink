@@ -31,7 +31,7 @@ export function chunkFloat32Array(array: Float32Array, chunkSize: number, radius
 }
 
 export function getRandomPositionConsideringPanels(panelNum: number): Vector3 {
-  const x = panelNum * 0.5 + 1.5
+  const x = panelNum * 0.5 - 0.5
   return new Vector3(Math.random() * x * 2 - x, Math.random() * 2 - 1, Math.random() * x * 2 - x)
 }
 
