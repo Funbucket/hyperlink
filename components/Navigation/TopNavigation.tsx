@@ -26,7 +26,7 @@ const TopNavigation = () => {
   //     })
   //   }
   // }
-  const { replace } = useRouter()
+  const router = useRouter()
   return (
     <div className="absolute top-0 z-10 w-screen text-sm text-center mt-6">
       {/* <button
@@ -55,7 +55,7 @@ const TopNavigation = () => {
         </button>
         <button
           onClick={() => {
-            replace('/list')
+            router.push('/list')
           }}
         >
           List View
