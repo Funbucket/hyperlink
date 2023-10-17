@@ -2,6 +2,7 @@ import { useMeshesStore } from '~/stores/meshes'
 import { usePanelPositionStore } from '~/stores/panelPosition'
 import { gsap } from 'gsap'
 import { vector3ToTweenValue } from '~/utils'
+import { useRouter } from 'next/router'
 
 const TopNavigation = () => {
   // const { positionArray, positionType, dispatchPositionType } = usePanelPositionStore((state) => ({
@@ -25,7 +26,7 @@ const TopNavigation = () => {
   //     })
   //   }
   // }
-
+  const { replace } = useRouter()
   return (
     <div className="absolute top-0 z-10 w-screen text-sm text-center mt-6">
       {/* <button
@@ -45,14 +46,20 @@ const TopNavigation = () => {
       </button> */}
       <div className="flex flex-row justify-center">
         <button
-          // className="mr-10"
+          className="mr-10"
           onClick={() => {
             window.open('https://forms.gle/LSDA7PGN1Y9zc6ik8', '_blank')
           }}
         >
           Create Link
         </button>
-        {/* <button>List View</button> */}
+        <button
+          onClick={() => {
+            replace('/list')
+          }}
+        >
+          List View
+        </button>
       </div>
     </div>
   )
