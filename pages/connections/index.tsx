@@ -1,6 +1,7 @@
 import { collection, getDocs } from 'firebase/firestore'
 import { Inter } from 'next/font/google'
 import { Suspense, useState } from 'react'
+import Head from 'next/head'
 
 import ThreeCanvas from '~/components/ThreeCanvas'
 import CursoredUserInfo from '~/components/CursoredUserInfo'
@@ -20,18 +21,23 @@ export default function ConnectionsPage({ users }: { users: User[] }) {
   const [guideStep, setGuideStep] = useState<'description' | 'usage' | 'end'>('description')
 
   return (
-    <main className={`${inter.className}`}>
-      <div>
-        <CursoredUserInfo hoverOnPanel={hoverOnPanel} mousePosition={mousePosition} />
-        <div className="absolute left-0 top-0 w-screen h-screen">
-          <Suspense fallback={<Loading />}>
-            {guideStep === 'end' && <TopNavigation />}
-            {showGuide && <Guide guideStep={guideStep} setGuideStep={setGuideStep} setShowGuide={setShowGuide} />}
-            <ThreeCanvas users={users} setHoverOnPanel={setHoverOnPanel} setShowGuide={setShowGuide} />
-          </Suspense>
+    <>
+      <Head>
+        <title>Hyperlink | 3D Gallary</title>
+      </Head>
+      <main className={`${inter.className}`}>
+        <div>
+          <CursoredUserInfo hoverOnPanel={hoverOnPanel} mousePosition={mousePosition} />
+          <div className="absolute left-0 top-0 w-screen h-screen">
+            <Suspense fallback={<Loading />}>
+              {guideStep === 'end' && <TopNavigation />}
+              {showGuide && <Guide guideStep={guideStep} setGuideStep={setGuideStep} setShowGuide={setShowGuide} />}
+              <ThreeCanvas users={users} setHoverOnPanel={setHoverOnPanel} setShowGuide={setShowGuide} />
+            </Suspense>
+          </div>
         </div>
-      </div>
-    </main>
+      </main>
+    </>
   )
 }
 

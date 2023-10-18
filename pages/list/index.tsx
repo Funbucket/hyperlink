@@ -1,24 +1,30 @@
 import { collection, getDocs, orderBy, query } from 'firebase/firestore'
+import Head from 'next/head'
 import Link from 'next/link'
 import { db } from '~/firebase'
 import User from '~/types/User'
 
 export default function ListPage({ users }: { users: User[] }) {
   return (
-    <div className="m-5">
-      <p>From here yon can connect with:</p>
-      <ul>
-        {users.map((user) => {
-          return (
-            <li key={user.id}>
-              <Link href={user.siteUrl} target="_blank">
-                {user.order} / {user.name} / {user.sentence}
-              </Link>
-            </li>
-          )
-        })}
-      </ul>
-    </div>
+    <>
+      <Head>
+        <title>Hyperlink | Interviews List</title>
+      </Head>
+      <div className="m-5">
+        <p>From here yon can connect with:</p>
+        <ul>
+          {users.map((user) => {
+            return (
+              <li key={user.id}>
+                <Link href={user.siteUrl} target="_blank">
+                  {user.order} / {user.name} / {user.sentence}
+                </Link>
+              </li>
+            )
+          })}
+        </ul>
+      </div>
+    </>
   )
 }
 
