@@ -34,6 +34,7 @@ const ThreeCanvas = ({ users, setHoverOnPanel, setShowGuide }: Props) => {
   return (
     <Canvas>
       <Lights />
+
       <ImagePanels users={users} setHoverOnPanel={setHoverOnPanel} />
       <Controls />
       <RoundedBox args={[1000, 1000, 1000]} radius={100}>
