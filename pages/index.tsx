@@ -9,6 +9,7 @@ export default function Home() {
     <>
       <Head>
         <title>Hyperlink | Home</title>
+        <meta name="google-site-verification" content="MfqeFmERle_FbpFYN6Zzh1R4Y1slWXNEfNKtya0mqW8" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={`${inter.className}`}>
